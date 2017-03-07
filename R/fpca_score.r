@@ -24,6 +24,7 @@ data.u<-matrix(as.numeric(as.vector(data.m[,-1])),nrow=nrow(data.m[,-1]),ncol=nc
       Y <- as.vector(data.u[(current+1):(current+m.l[i]),1])  ## observed  measurements of ith curve
       meastime <- data.u[(current+1):(current+m.l[i]),2] ## measurement times of the ith curve
       gridtime <- ceiling(N*meastime)   ## project measurement time onto the grid
+      gridtime[gridtime <= 0] = 1 #quickfix
       muy <- muhat[gridtime]
       Phiy  <- matrix(eigenfuncs.u[gridtime,1:K],ncol=K)
       Sigy <- Phiy %*% evalmat %*% t(Phiy) + sig2hat * diag(m.l[i])
